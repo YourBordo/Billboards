@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Videos\**" />
+    <EmbeddedResource Remove="Videos\**" />
+    <None Remove="Videos\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Service\ModelServices.csproj" />
+  </ItemGroup>
+
+</Project>

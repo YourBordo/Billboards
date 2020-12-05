@@ -1,0 +1,65 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Billboards.Models
+@model Billboards.ModelsView.EnableDevicesAndDevicesInGroupAndCurrentDeviceGroup
+@{
+    ViewData["Title"] = "DevicesInGroup";
+    Layout = "~/Views/User/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Devices</title>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+
+</head>
+<body>
+    <label class="text-dark mt-5 ml-5">
+        Add Device to current group
+    </label>
+    <form class="form-inline ml-5" asp-action="AddDeviceToGroup"  asp-route-deviceGroupId="@Model.DeviceGroup.Id">
+        <div class="input-group">
+            <button type="submit" class="btn btn-primary">Add Device</button>
+            <select class="custom-select" name="deviceId">
+                <option selected>Choose device</option>
+                @for (var i = 0; i < @Model.EnableDevices.Count(); ++i)
+                {
+                    <option value="@Model.EnableDevices.ElementAt(i).Id">@(i + 1) th device</option>
+                }
+            </select>
+        </div>
+    </form>
+    <div style="margin: 2% 8%;">
+        <h2>Devices in group</h2>
+        <table class="table ">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Status</th>
+                    @*<th scope="col"></th>*@
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            @for (var i = 0; i < @Model.DevicesInGroup.Count(); ++i)
+            {
+                <tbody>
+                    <tr>
+                        <th scope="row">@(i + 1)</th>
+                        <td>Work</td>
+                        @*<td>@(device.Id + 10)</td>*@
+                        <td class="btn-group  float-right" role="group" aria-label="Basic example">
+                            <div class="btn-group">
+                                <a class="btn btn-info mr-3" asp-action="Advertising" asp-route-deviceId="@Model.DevicesInGroup.ElementAt(i).Id">View advertising list</a>
+                                <a class="btn btn-danger mr-3" asp-action="DeleteDeviceInGroup"
+                                   asp-route-deviceId="@Model.DevicesInGroup.ElementAt(i).Id"
+                                   asp-route-deviceGroupId="@Model.DeviceGroup.Id">Delete from group</a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            }
+        </table>
+    </div>
+</body>
+
+
+
